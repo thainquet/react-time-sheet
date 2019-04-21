@@ -14,27 +14,33 @@ export default  class LoadingButton extends React.Component {
   
       this.state = {
         isLoading: false,
+        buttonText: 'Create!',
+        dis: false
       };
     }
   
     handleClick() {
-      this.setState({ isLoading: true }, () => {
+      this.setState({ isLoading: true, dis: true }, () => {
         simulateNetworkRequest().then(() => {
-          this.setState({ isLoading: false });
+          this.setState({ isLoading: false, buttonText: 'Successfully!'});
+        })
+        .then(() => simulateNetworkRequest())
+        .then(() => {
+            window.location.reload();
         });
       });
     }
   
     render() {
-      const { isLoading } = this.state;
+      const { isLoading , buttonText, dis} = this.state;
   
       return (
         <Button
           variant="primary"
-          disabled={isLoading}
+          disabled={dis}
           onClick={!isLoading ? this.handleClick : null}
         >
-          {isLoading ? 'Loading…' : 'Click to load'}
+          {isLoading ? 'Creating...' : buttonText}
         </Button>
       );
     }
