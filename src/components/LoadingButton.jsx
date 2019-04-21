@@ -33,7 +33,7 @@ export default  class LoadingButton extends React.Component {
   
     render() {
       const { isLoading , buttonText, dis} = this.state;
-  
+        console.log(this.props.data.test)
       return (
         <Button
           variant="primary"

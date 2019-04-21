@@ -31,7 +31,7 @@ export default class Review extends Component {
                         <Form.Control as="textarea" rows="3" />
                     </Form.Group>
                     </Form>   
-                    <Button className="btn-primary">Add</Button> 
+                    <Button data={{test: 'ok'}}/> 
                 </Col>
             </Row>
         </Container>
