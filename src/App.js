@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Home from './components/Home/Home'
 import MainPage from './components/Home/MainPage'
 import Review from './components/Home/Review'
 import { Container, Row, Col} from 'react-bootstrap'
@@ -14,7 +15,7 @@ class App extends Component {
           <Row>
             <Col md='12'>
             <Route exact path="/" component={MainPage} />
-            <Route path="/home" component={Review} />
+            <Route path="/home" component={Home} />
             </Col>
           </Row>
         </Container>

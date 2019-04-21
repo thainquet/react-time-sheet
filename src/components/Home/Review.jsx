@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import {Col, Row, Container} from 'react-bootstrap'
 
 export default class Review extends Component {
   render() {
     return (
       <div className="App">
-        <div className="container">
-            <div className="row">
+        <Container>
+            <Row>
                 <div className="col-md-2">
                     <img src="" alt="avt"/>
                 </div>
-                <div className="col-md-10">
+                <Col md={{span: 6, offset: 2}}>
                 <Form>
                     <Form.Group controlId="exampleForm.ControlInput1">
                         <Form.Label>Asignee</Form.Label>
@@ -28,10 +30,11 @@ export default class Review extends Component {
                         <Form.Label>Note</Form.Label>
                         <Form.Control as="textarea" rows="3" />
                     </Form.Group>
-                    </Form>    
-                </div>
-            </div>
-        </div>
+                    </Form>   
+                    <Button className="btn-primary">Add</Button> 
+                </Col>
+            </Row>
+        </Container>
       </div>
     );
   }

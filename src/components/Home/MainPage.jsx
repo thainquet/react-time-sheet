@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import Tab from 'react-bootstrap/Tab'
+import Tabs from 'react-bootstrap/Tabs'
 
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-router-dom'
