@@ -2,6 +2,19 @@ import React from 'react'
 
 import { Bar, Chart } from 'react-chartjs-2'
 
+const chartOption = {
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true,
+                steps: 10,
+                stepValue: 2,
+                max: 20
+            }
+        }]
+    }
+}
+
 export default class MyChart extends React.Component {
     constructor (props) {
         super(props)
@@ -13,12 +26,11 @@ export default class MyChart extends React.Component {
 
     formChart() {
         return {
-            labels: ['a', 'b','c','d','e'],
+            labels: ['1', '2','c','d','e'],
             datasets: [
                 {
                   label: "Hour done",
                   fill: true,
-                  lineTension: 0.1,
                   backgroundColor: 'rgba(75,192,192,0.4)',
                   borderColor: 'rgba(75,192,192,1)',
                   borderCapStyle: 'butt',
@@ -43,7 +55,7 @@ export default class MyChart extends React.Component {
     render() {
         return (
             <div>
-                <Bar data={this.formChart()} />
+                <Bar data={this.formChart()} options={ chartOption }/>
             </div>
         );
     }
