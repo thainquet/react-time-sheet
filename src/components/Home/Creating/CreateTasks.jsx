@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form'
-import Button from '../LoadingButton'
+import Button from '../../BaseComponents/LoadingButton'
 import {Col, Row, Container} from 'react-bootstrap'
 
 export default class Review extends Component {

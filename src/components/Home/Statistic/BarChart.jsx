@@ -2,14 +2,24 @@ import React from 'react'
 
 import { Bar, Chart } from 'react-chartjs-2'
 
+import { tasks as data } from '../../../assets/simulatedAPI'
+
+const dateForCreatingChart = [];
+const datasetForCreatingChart = [];
+
+data.data.forEach( i => {
+    dateForCreatingChart.push(i.date)
+})
+data.data.forEach(i => {
+    datasetForCreatingChart.push(i.hours)
+})
+
 const chartOption = {
     scales: {
         yAxes: [{
             ticks: {
                 beginAtZero: true,
-                steps: 10,
-                stepValue: 2,
-                max: 20
+                stepValue: 0.5,
             }
         }]
     }
@@ -26,7 +36,7 @@ export default class MyChart extends React.Component {
 
     formChart() {
         return {
-            labels: ['1', '2','c','d','e'],
+            labels: dateForCreatingChart,
             datasets: [
                 {
                   label: "Hour done",
@@ -46,7 +56,7 @@ export default class MyChart extends React.Component {
                   pointHoverBorderWidth: 2,
                   pointRadius: 1,
                   pointHitRadius: 10,
-                  data: ['1','2','3','4','5']
+                  data: datasetForCreatingChart
                 }
               ]
         }

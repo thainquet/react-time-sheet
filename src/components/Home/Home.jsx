@@ -3,12 +3,11 @@ import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
 import { Row, Col } from 'react-bootstrap'
 
-import Review from './Review'
-import Chart from './BarChart'
+import Review from './Creating/CreateTasks'
+import Chart from './Statistic/BarChart'
+import UserArea from './Statistic/User'
 
 class Home extends React.Component {
-
-  
 
   componentWillMount() {
   }
@@ -19,8 +18,12 @@ class Home extends React.Component {
       <div>
         <Tabs defaultActiveKey="statistic" id="uncontrolled-tab-example">
           <Tab eventKey="statistic" title="Statistic">
+            <br/>
             <Row>
-              <Col md={{ span: 6, offset: 3}}>
+              <Col md={{span: 3}}>
+                <UserArea />
+              </Col>
+              <Col md={{ span: 6}}>
                 <Chart />
               </Col>
             </Row>
