@@ -1,4 +1,4 @@
-import React, { useGlobal } from 'reactn';
+import React from 'reactn';
 
 
 import { withFormik } from 'formik'
@@ -10,7 +10,6 @@ import InputLabel from '@material-ui/core/InputLabel'
 import Button from '@material-ui/core/Button'
 import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import Typography from '@material-ui/core/Typography'
 
