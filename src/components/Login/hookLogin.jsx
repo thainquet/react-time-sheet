@@ -4,34 +4,44 @@ import React, { useState, useGlobal } from 'reactn';
 
 const hookLogin = props => {
     const [username, setUsername] = useState('')
-    const [message, setMessage] = useState('')
+    const [messageUsername, setMessage] = useState('')
 
     const handleInput = (event) => {
         let input = event.target.value;
         if (!input) {
-            setMessage(message => message = "ko dc de trong")
-            console.log(message)
+            setMessage(messageUsername => messageUsername = "ko dc de trong")
         }
         else {
             if (input.length < 6) {
-                setMessage(message => message= "ten k hop le")
-                console.log(message)
+                setMessage(messageUsername => messageUsername = "ten k hop le")
             }
-            else setUsername(username => username = input)
-        } 
+            else {
+                setUsername(username => username = input)
+                setMessage(messageUsername => messageUsername = '')
+            }
+        }
     }
 
     return (
         <div>
-            <label htmlFor="">Username</label>
-            <input type="text" autoFocus autoComplete="off" name="username" onBlur={(event) => handleInput(event)}/>
-            <br/>
-            <label htmlFor="">Password</label>
-            <input type="text" autoComplete="off" name="username" onBlur={(event) => handleInput(event)}/>
-            <br/>
+            <div>
+                <label htmlFor="">Username</label>
+                <input type="text" autoFocus autoComplete="off" name="username" onBlur={(event) => handleInput(event)} />
+                <br />
+                <span>
+                    {messageUsername && <b>{messageUsername}</b>}
+                </span>
+            </div>
+            {/* <div>
+                <label htmlFor="">Password</label>
+                <input type="text" autoComplete="off" name="username" onBlur={(event) => handleInput(event)} />
+                <br />
+                <span>
+                    {message && <b>{message}</b>}
+                </span>
+            </div> */}
             <button onClick={() => {
-                if (!message) console.log({username})
-                else console.log(message)
+                messageUsername ? console.log('sai') : console.log({username})
             }}>send</button>
         </div>
     )
