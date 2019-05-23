@@ -8,14 +8,17 @@ const hookLogin = props => {
 
     const handleInput = (event) => {
         let input = event.target.value;
+        let regexTV = /^[ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]+$/
+        let regexSpace = /\s+/g
         if (!input) {
             setMessage(messageUsername => messageUsername = "ko dc de trong")
         }
         else {
-            if (input.length < 6) {
-                setMessage(messageUsername => messageUsername = "ten k hop le")
+            if (input.length < 6 || regexTV.test(input)) {                
+                setMessage(messageUsername => messageUsername = "gom 6 ky tu viet thuong tro len, viet lien ko dau")
             }
             else {
+                console.log(input)
                 setUsername(username => username = input)
                 setMessage(messageUsername => messageUsername = '')
             }
