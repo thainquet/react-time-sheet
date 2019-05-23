@@ -7,9 +7,14 @@ import Review from './Creating/CreateTasks'
 import Chart from './Statistic/BarChart'
 import UserArea from './Statistic/User'
 
+import axios from 'axios'
+
 class Home extends React.Component {
 
+
   componentWillMount() {
+    axios.get('http://127.0.0.1:5000/test')
+    .then (data => console.log(data.data[0].id))
   }
 
   render() {
