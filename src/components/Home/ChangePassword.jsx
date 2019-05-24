@@ -2,8 +2,7 @@
 import React, {useState} from 'reactn';
 import { Link } from 'react-router-dom'
 
-
-const Register = props => {
+const ChangePass = props => {
     const [form, setFormInfo] = useState({
         username: '',
         password: ''
@@ -43,5 +42,5 @@ const Register = props => {
     )
 }
 
-export default Register;
+export default ChangePass;
 
