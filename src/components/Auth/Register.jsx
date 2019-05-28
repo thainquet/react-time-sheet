@@ -3,7 +3,7 @@ import React, { useState} from 'reactn';
 import { Link } from 'react-router-dom'
 
 
-const hookLogin = props => {
+const Register = props => {
     // handle username
     const [username, setUsername] = useState('')
     const [messageUsername, setUsernameMessage] = useState('')
@@ -100,5 +100,5 @@ const hookLogin = props => {
     )
 }
 
-export default hookLogin;
+export default Register;
 
