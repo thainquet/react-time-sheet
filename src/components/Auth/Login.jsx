@@ -1,7 +1,9 @@
 
 import React, {useState} from 'reactn';
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
+const LOGIN_URL = "http://127.0.0.1:5000/test"
 
 const Login = props => {
     const [form, setFormInfo] = useState({
@@ -9,9 +11,16 @@ const Login = props => {
         password: ''
     })
 
-    const PrintInput = (event) => {
+    const Login = async (event) => {
         event.preventDefault();
-        localStorage.setItem('username', form.username)
+        const login = await axios.get(LOGIN_URL)
+        if (login.data.stt === 200) {
+            localStorage.setItem('auth', true)
+            localStorage.setItem('username', form.username)
+        } else {
+            localStorage.setItem('auth', false)
+        }
+
     }
 
     const updateField = event => {
@@ -34,7 +43,7 @@ const Login = props => {
                 <br />
             </div>
 
-            <button onClick={PrintInput}><Link to="/home">Dang nhap</Link></button>
+            <button onClick={Login}><Link to="/home">Dang nhap</Link></button>
 
             <div>
                 <Link to="/register">Dang ky</Link>

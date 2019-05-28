@@ -6,8 +6,8 @@ const auth = localStorage.getItem("auth")
 const PrivateRouter = ( {TrueCpn, FalseCpn }) => {
     return (
         <Route
-            render = {props => 
-                auth === true ? <Route component={TrueCpn}/> : <Route component={FalseCpn} />
+            render = {() => 
+                auth === 'true' ? <Route component={TrueCpn}/> : <Route component={FalseCpn} />
             }
         />
     )

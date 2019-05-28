@@ -18,7 +18,7 @@ const Home = props => {
   }, [])
 
   const handleLogout = () => {
-    localStorage.removeItem("username")
+    localStorage.removeItem("auth")
   }
 
   return (
@@ -29,8 +29,7 @@ const Home = props => {
       <br />
       <button><Link to="/update">doi mat khau</Link></button>
       <button onClick={() => console.log(data)}>data</button>
-      <button onClick={handleLogout}><Link to="/login">Log out</Link></button>
-      <pre>ádasda</pre>
+      <button onClick={handleLogout}><Link to="/">Log out</Link></button>
     </div>
   )
 }
