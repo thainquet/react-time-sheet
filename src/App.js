@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Container, Row, Col} from 'react-bootstrap'
 import './App.css';
 
@@ -14,8 +14,7 @@ const authed = localStorage.getItem('auth')
 const isLogin =() => {
   return authed === 'true'
 }
-class App extends Component {
-  render() {
+const App = () => {
     return (
       <div className="App">
         <Container>
@@ -33,7 +32,6 @@ class App extends Component {
         </Container>
       </div>
     );
-  }
 }
 
 export default App;

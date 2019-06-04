@@ -11,7 +11,7 @@ const ChangePass = props => {
         email: ''
     })
 
-    const [res, resMessage] = useState('')
+    // const [res, resMessage] = useState('')
 
     const resetPass = async () => {
         await axios.post(RESET_PASS_URL, {

@@ -1,6 +1,5 @@
 
 import React, { useState} from 'reactn';
-import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 
 
@@ -71,27 +70,27 @@ const Register = (props) => {
                 <label htmlFor="">Username</label>
                 <input type="text" autoFocus autoComplete="off" name="username" onChange={(event) => handleUsernameInput(event)} />
                 <br />
-                <span>
+                <pre>
                     {messageUsername && <b>{messageUsername}</b>}
-                </span>
+                </pre>
             </div>
 
             <div>
                 <label htmlFor="">Password</label>
                 <input type="password" autoComplete="off" name="password" onChange={(event) => handlePasswordInput(event)} />
                 <br />
-                <span>
+                <pre>
                     {messagePassword && <b>{messagePassword }</b>}
-                </span>
+                </pre>
             </div>
 
             <div>
                 <label htmlFor="">Email</label>
                 <input type="text" autoComplete="off" name="email" onChange={(event) => handleEmailInput(event)} />
                 <br />
-                <span>
+                <pre>
                     {emailMessage && <b>{emailMessage }</b>}
-                </span>
+                </pre>
             </div>
 
             <button onClick={() => {
