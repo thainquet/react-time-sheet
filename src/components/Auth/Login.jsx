@@ -1,11 +1,14 @@
 
 import React, {useState} from 'reactn';
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
 import axios from 'axios'
 
 const LOGIN_URL = "http://127.0.0.1:5000/login"
+const AUTHENTICATED = localStorage.getItem('auth')
 
-const Login = props => {
+const Login = (props) => {
+    if (AUTHENTICATED) props.history.push('/home')
     const [form, setFormInfo] = useState({
         username: '',
         password: ''
@@ -13,14 +16,16 @@ const Login = props => {
 
     const Login = async (event) => {
         event.preventDefault();
+        
         const login = await axios.post(LOGIN_URL, {
                 username: form.username,
                 password: form.password
         })
-        console.log(login)
+
         if (login.data.stt === 200) {
             localStorage.setItem('auth', true)
             localStorage.setItem('username', form.username)
+            window.location.href = '/home'
         } else {
             localStorage.setItem('auth', false)
         }
@@ -33,6 +38,10 @@ const Login = props => {
           [event.target.name]: event.target.value
         });
       };
+
+    const register = () => {
+        props.history.push("/register")
+    }
 
     return (
         <div>
@@ -47,14 +56,14 @@ const Login = props => {
                 <br />
             </div>
 
-            <button onClick={Login}><Link to="/home">Dang nhap</Link></button>
+            <button onClick={Login}>Dang nhap</button>
 
             <div>
-                <Link to="/register">Dang ky</Link>
+                <button onClick={register}>Dang ky</button>
             </div>
         </div>
     )
 }
 
-export default Login;
+export default withRouter(Login);
 

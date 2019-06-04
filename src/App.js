@@ -17,9 +17,10 @@ class App extends Component {
         <Container>
           <Row>
             <Col md='12'>
-            <PrivateRouter path="/" TrueCpn={Home} FalseCpn={Login}></PrivateRouter>
+            {/* <PrivateRouter path="/home" TrueCpn={Home} FalseCpn={Login}></PrivateRouter> */}
+            <Route path="/home" component={Home} />
             <Route path="/register" component={Register} />
-            <Route path="/login" component={Login} />
+            <Route exec path="/" component={Login} />
             <Route path="/update" component={ChangePass} />
             </Col>
           </Row>

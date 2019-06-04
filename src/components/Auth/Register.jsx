@@ -1,9 +1,10 @@
 
 import React, { useState} from 'reactn';
 import { Link } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
 
-const Register = props => {
+const Register = (props) => {
     // handle username
     const [username, setUsername] = useState('')
     const [messageUsername, setUsernameMessage] = useState('')
@@ -60,6 +61,10 @@ const Register = props => {
         }
     }
 
+    const handleToLoginForm = () => {
+        props.history.push('/login')
+    }
+
     return (
         <div>
             <div>
@@ -91,14 +96,14 @@ const Register = props => {
 
             <button onClick={() => {
                 (messageUsername || messagePassword || emailMessage) ? console.log('input k hop le') : console.log({username}, {password}, {email})
-            }}><Link to="/home">Dang ky</Link></button>
+            }}>Dang ky</button>
 
             <div>
-                <Link to="/login">Dang nhap</Link>
+                <button onClick={handleToLoginForm}>Dang nhap</button>
             </div>
         </div>
     )
 }
 
-export default Register;
+export default withRouter(Register);
 
