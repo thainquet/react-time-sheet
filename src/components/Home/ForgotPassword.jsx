@@ -1,7 +1,8 @@
 
-import React, {useState} from 'reactn';
+import React, { useState } from 'reactn';
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { withRouter } from 'react-router'
 
 const RESET_PASS_URL = 'http://127.0.0.1:5000/forgotPass'
 
@@ -11,43 +12,43 @@ const ChangePass = props => {
         email: ''
     })
 
-    const [res, resMessage ] = useState('')
- 
-    const resetPass = () => {
-        await axios.post(RESET_PASS_URL, {
+    const [res, resMessage] = useState('')
+
+    const resetPass = async () => {
+        resMessage(res => res = '')
+        const reset = await axios.post(RESET_PASS_URL, {
             username: form.username,
-            password: form.password
-    })
+            email: form.email
+        })
+        if (reset) resMessage(res => res = reset.data.message)
+        
     }
 
     const updateField = event => {
         setFormInfo({
-          ...form,
-          [event.target.name]: event.target.value
+            ...form,
+            [event.target.name]: event.target.value
         });
-      };
+    };
 
     return (
         <div>
             <div>
                 <label htmlFor="">Username</label>
-                <input type="text" name="username" autoFocus autoComplete="off" value={ form.username } onChange={updateField}/>
+                <input type="text" name="username" autoFocus autoComplete="off" value={form.username} onChange={updateField} />
             </div>
 
             <div>
                 <label htmlFor="">Email</label>
-                <input type="text" name="email" autoComplete="off" value={ form.email } onChange={updateField}/>
+                <input type="text" name="email" autoComplete="off" value={form.email} onChange={updateField} />
                 <br />
             </div>
-
-            <button onClick={resetPass }><Link to="/home">Reset Password</Link></button>
-
-            <div>
-                <button></button>
-            </div>
+            <pre>{res}</pre>
+            <button onClick={resetPass}>Reset Password</button>
+            <button onClick={() => props.history.push('/login')}>Login page</button>
         </div>
     )
 }
 
-export default ChangePass;
+export default withRouter(ChangePass);
 

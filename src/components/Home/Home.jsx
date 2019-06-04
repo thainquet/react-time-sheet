@@ -24,7 +24,7 @@ const Home = props => {
 
   const handleLogout = () => {
     localStorage.removeItem("auth")
-    window.location.href = '/'
+    window.location.href = '/login'
   }
 
   return (
@@ -35,7 +35,7 @@ const Home = props => {
       <br />
       <button><Link to="/update">doi mat khau</Link></button>
       <button onClick={() => console.log(data)}>data</button>
-      <button onClick={handleLogout}><Link to="/">Log out</Link></button>
+      <button onClick={handleLogout}>Log out</button>
     </div>
   )
 }

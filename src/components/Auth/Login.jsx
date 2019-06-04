@@ -59,7 +59,8 @@ const Login = (props) => {
             <button onClick={Login}>Dang nhap</button>
 
             <div>
-                <button onClick={register}>Dang ky</button>
+                <button onClick={() => props.history.push("/register")}>Dang ky</button>
+                <button onClick={() => props.history.push("/forgot")}>Quen mat khau</button>
             </div>
         </div>
     )
