@@ -6,11 +6,14 @@ import Login from './components/Auth/Login'
 import Register from './components/Auth/Register'
 import Home from './components/Home/Home'
 import ChangePass from './components/Home/ChangePassword' 
-import PrivateRouter from './components/Auth/PrivateRouter'
 import ForgotPass from './components/Home/ForgotPassword'
 
 import {Route } from 'react-router-dom'
 
+const authed = localStorage.getItem('auth')
+const isLogin =() => {
+  return authed === 'true'
+}
 class App extends Component {
   render() {
     return (
@@ -18,8 +21,9 @@ class App extends Component {
         <Container>
           <Row>
             <Col md='12'>
-            {/* <PrivateRouter path="/home" TrueCpn={Home} FalseCpn={Login}></PrivateRouter> */}
-            <Route path="/home" component={Home} />
+            <Route exec path="/home" render={() => {
+              return isLogin() ? <Home /> : <Login />
+            }} />
             <Route path="/register" component={Register} />
             <Route path="/login" component={Login} />
             <Route path="/update" component={ChangePass} />
