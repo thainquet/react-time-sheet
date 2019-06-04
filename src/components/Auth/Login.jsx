@@ -38,10 +38,6 @@ const Login = (props) => {
         });
       };
 
-    const register = () => {
-        props.history.push("/register")
-    }
-
     return (
         <div>
             <div>

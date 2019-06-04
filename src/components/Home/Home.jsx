@@ -1,8 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
-import axios from 'axios'
-
-const BASE_URL = "http://127.0.0.1:5000/allUser"
+import React from 'react';
 const AUTHENTICATED = localStorage.getItem('auth')
 
 const Home = props => {
@@ -12,7 +8,7 @@ const Home = props => {
   }
   let username = localStorage.getItem("username")
 
-  const [data, setResponseData] = useState([])
+  // const [data, setResponseData] = useState([])
   // useEffect(() => {
   //   const fetchData = async () => {
   //     const result = await axios.get(BASE_URL)
@@ -24,17 +20,18 @@ const Home = props => {
 
   const handleLogout = () => {
     localStorage.removeItem("auth")
+    localStorage.removeItem("username")
+    localStorage.removeItem("token")
     window.location.href = '/login'
   }
 
   return (
     <div>
       <br />
-      hello {username}
+      <b>Login successfully!! Welcome back, {username}</b>
       <br />
       <br />
-      <button><Link to="/update">doi mat khau</Link></button>
-      <button onClick={() => console.log(data)}>data</button>
+      <button onClick={() => window.location.href = '/update'}>Change password</button>
       <button onClick={handleLogout}>Log out</button>
     </div>
   )

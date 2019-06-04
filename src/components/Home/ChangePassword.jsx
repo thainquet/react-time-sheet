@@ -8,7 +8,8 @@ const RESET_PASS_URL = 'http://127.0.0.1:5000/forgotPass'
 const ChangePass = props => {
     const [form, setFormInfo] = useState({
         username: '',
-        email: ''
+        password: '',
+        newpassword: ''
     })
 
     // const [res, resMessage] = useState('')
