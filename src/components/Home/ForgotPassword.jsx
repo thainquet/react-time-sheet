@@ -5,7 +5,7 @@ import { withRouter } from 'react-router'
 
 const RESET_PASS_URL = 'http://127.0.0.1:5000/forgotPass'
 
-const ChangePass = props => {
+const ForgotPass = props => {
     const [form, setFormInfo] = useState({
         username: '',
         email: ''
@@ -15,12 +15,15 @@ const ChangePass = props => {
 
     const resetPass = async () => {
         resMessage(res => res = '')
-        const reset = await axios.post(RESET_PASS_URL, {
-            username: form.username,
-            email: form.email
-        })
-        if (reset) resMessage(res => res = reset.data.message)
-        
+        if (!form.username || !form.email) 
+            resMessage(res => res = 'All fields required!')
+        else {
+            const reset = await axios.post(RESET_PASS_URL, {
+                username: form.username,
+                email: form.email
+            })
+            if (reset) resMessage(res => res = reset.data.message)  
+        }      
     }
 
     const updateField = event => {
@@ -49,5 +52,5 @@ const ChangePass = props => {
     )
 }
 
-export default withRouter(ChangePass);
+export default withRouter(ForgotPass);
 

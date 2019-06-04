@@ -1,5 +1,5 @@
 
-import React, {useState} from 'reactn';
+import React, { useState } from 'reactn';
 import { withRouter } from 'react-router'
 import axios from 'axios'
 
@@ -7,49 +7,57 @@ const LOGIN_URL = "http://127.0.0.1:5000/login"
 const AUTHENTICATED = localStorage.getItem('auth')
 
 const Login = (props) => {
-    if (AUTHENTICATED) props.history.push('/home')
+    if (AUTHENTICATED === 'true') props.history.push('/home')
     const [form, setFormInfo] = useState({
         username: '',
         password: ''
     })
 
+    const [res, resMessage] = useState('')
+
     const Login = async (event) => {
-        event.preventDefault();
-        
-        const login = await axios.post(LOGIN_URL, {
+        // event.preventDefault();
+        if (!form.username || !form.password)
+            resMessage(res => res = 'All fields required!')
+        else {
+            const login = await axios.post(LOGIN_URL, {
                 username: form.username,
                 password: form.password
-        })
+            })
 
-        if (login.data.stt === 200) {
-            localStorage.setItem('auth', true)
-            localStorage.setItem('username', form.username)
-            window.location.href = '/home'
-        } else {
-            localStorage.setItem('auth', false)
+            resMessage(res => res = login.data.message)
+
+            if (login.data.stt === 200) {
+                localStorage.setItem('auth', true)
+                localStorage.setItem('username', form.username)
+                window.location.href = '/home'
+            } else {
+                localStorage.setItem('auth', false)
+            }
         }
-
     }
 
     const updateField = event => {
         setFormInfo({
-          ...form,
-          [event.target.name]: event.target.value
+            ...form,
+            [event.target.name]: event.target.value
         });
-      };
+    };
 
     return (
         <div>
             <div>
                 <label htmlFor="">Username</label>
-                <input type="text" name="username" autoFocus autoComplete="off" value={ form.username } onChange={updateField}/>
+                <input type="text" name="username" autoFocus autoComplete="off" value={form.username} onChange={updateField} />
             </div>
 
             <div>
                 <label htmlFor="">Password</label>
-                <input type="password" name="password" autoComplete="off" value={ form.password } onChange={updateField}/>
+                <input type="password" name="password" autoComplete="off" value={form.password} onChange={updateField} />
                 <br />
             </div>
+
+            <pre>{res}</pre>
 
             <button onClick={Login}>Dang nhap</button>
 

@@ -1,9 +1,7 @@
-
 import React, { useState } from 'reactn';
-import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-const RESET_PASS_URL = 'http://127.0.0.1:5000/forgotPass'
+const CHANGE_PASS_URL = 'http://127.0.0.1:5000/changePass'
 
 const ChangePass = props => {
     const [form, setFormInfo] = useState({
@@ -12,13 +10,23 @@ const ChangePass = props => {
         newpassword: ''
     })
 
-    // const [res, resMessage] = useState('')
+    const [res, resMessage] = useState('')
 
     const resetPass = async () => {
-        await axios.post(RESET_PASS_URL, {
-            username: form.username,
-            password: form.password
-        })
+        resMessage(res => res = '')
+        if (!form.username || !form.password || !form.newpassword) 
+            resMessage(res => res = 'All fields required!')
+        else 
+            if (form.password === form.newpassword) 
+                resMessage(res => res = 'Old password and new password must be different!')
+            else {
+                const result = await axios.post(CHANGE_PASS_URL, {
+                    username: form.username,
+                    password: form.password,
+                    newpassword: form.newpassword
+                })
+                if (result) resMessage(res => res = result.data.message)
+            }
     }
 
     const updateField = event => {
@@ -36,15 +44,22 @@ const ChangePass = props => {
             </div>
 
             <div>
-                <label htmlFor="">Email</label>
-                <input type="text" name="email" autoComplete="off" value={form.email} onChange={updateField} />
+                <label htmlFor="">Password</label>
+                <input type="password" name="password" autoComplete="off" value={form.password} onChange={updateField} />
                 <br />
             </div>
 
-            <button onClick={resetPass}><Link to="/home">Reset Password</Link></button>
+            <div>
+                <label htmlFor="">New password</label>
+                <input type="password" name="newpassword" autoComplete="off" value={form.newpassword} onChange={updateField} />
+                <br />
+            </div>
+
+            <pre>{res}</pre>
 
             <div>
-                <button></button>
+                <button onClick={resetPass}>Change Password</button>
+                <button onClick={() => props.history.push('/home')}>Back to Homepage</button>
             </div>
         </div>
     )
