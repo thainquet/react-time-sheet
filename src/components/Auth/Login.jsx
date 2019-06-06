@@ -19,7 +19,6 @@ const Login = (props) => {
   const [res, resMessage] = useState('')
 
   const handleLogin = async (event) => {
-    // event.preventDefault();
     if (!form.username || !form.password)
       resMessage(res => res = 'All fields required!')
     else {

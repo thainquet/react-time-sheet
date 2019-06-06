@@ -1,9 +1,11 @@
 import React, { useState } from 'reactn';
 import axios from 'axios'
+import { isLogin } from 'helpers/auth'
 
 const CHANGE_PASS_URL = 'http://127.0.0.1:5000/changePass'
 
 const ChangePass = props => {
+    if (!isLogin()) props.history.push('/login')
     const [form, setFormInfo] = useState({
         username: '',
         password: '',

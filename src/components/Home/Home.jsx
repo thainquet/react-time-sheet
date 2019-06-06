@@ -5,17 +5,6 @@ import { isLogin } from 'helpers/auth'
 const Home = props => {
   if (!isLogin()) return <Redirect to="/login" />
   const [username] = useGlobal('username');
-  // console.log("test reactn" + test);
-
-  // const [data, setResponseData] = useState([])
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const result = await axios.get(BASE_URL)
-  //     await setResponseData(result.data)
-  //   }
-  //   fetchData();
-  //   console.log(data)
-  // }, [])
 
   const handleLogout = () => {
     localStorage.clear()

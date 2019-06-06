@@ -6,7 +6,7 @@ import Login from './components/Auth/Login'
 import Register from './components/Auth/Register'
 import Home from './components/Home/Home'
 import ChangePass from './components/Home/ChangePassword'
-import ForgotPass from './components/Home/ForgotPassword'
+import ForgotPass from './components/Auth/ForgotPassword'
 
 import { Route, Switch } from 'react-router-dom'
 import { clearAuth } from 'helpers/clearAuth'
