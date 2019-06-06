@@ -1,1 +1,1 @@
-app for management tasks
+training app by Teko
