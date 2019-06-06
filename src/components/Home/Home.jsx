@@ -1,12 +1,11 @@
-import React from 'react';
-const AUTHENTICATED = localStorage.getItem('auth')
+import React, { useGlobal } from 'reactn';
+import { Redirect } from 'react-router-dom'
+import { isLogin } from 'helpers/auth'
 
 const Home = props => {
-  if (AUTHENTICATED === 'false') {
-    props.history.push('/login')
-    return;
-  }
-  let username = localStorage.getItem("username")
+  if (!isLogin()) return <Redirect to="/login" />
+  const [username] = useGlobal('username');
+  // console.log("test reactn" + test);
 
   // const [data, setResponseData] = useState([])
   // useEffect(() => {
@@ -19,9 +18,7 @@ const Home = props => {
   // }, [])
 
   const handleLogout = () => {
-    localStorage.removeItem("auth")
-    localStorage.removeItem("username")
-    localStorage.removeItem("token")
+    localStorage.clear()
     window.location.href = '/login'
   }
 

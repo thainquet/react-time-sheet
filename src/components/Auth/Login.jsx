@@ -1,72 +1,80 @@
 
-import React, { useState } from 'reactn';
+import React, { useState, setGlobal } from 'reactn';
 import { withRouter } from 'react-router'
+import { isLogin } from 'helpers/auth'
 import axios from 'axios'
 
 const LOGIN_URL = "http://127.0.0.1:5000/login"
-const AUTHENTICATED = localStorage.getItem('auth')
+// const AUTHENTICATED = localStorage.getItem('auth')
 
 const Login = (props) => {
-    if (AUTHENTICATED === 'true') props.history.push('/home')
-    const [form, setFormInfo] = useState({
-        username: '',
-        password: ''
-    })
+  if (isLogin())
+    props.history.push('/home')
 
-    const [res, resMessage] = useState('')
+  const [form, setFormInfo] = useState({
+    username: '',
+    password: ''
+  })
 
-    const Login = async (event) => {
-        // event.preventDefault();
-        if (!form.username || !form.password)
-            resMessage(res => res = 'All fields required!')
-        else {
-            const login = await axios.post(LOGIN_URL, {
-                username: form.username,
-                password: form.password
-            })
+  const [res, resMessage] = useState('')
 
-            resMessage(res => res = login.data.message)
+  const handleLogin = async (event) => {
+    // event.preventDefault();
+    if (!form.username || !form.password)
+      resMessage(res => res = 'All fields required!')
+    else {
+      const login = await axios.post(LOGIN_URL, {
+        username: form.username,
+        password: form.password
+      })
 
-            if (login.data.stt === 200) {
-                localStorage.setItem('auth', true)
-                localStorage.setItem('username', form.username)
-                window.location.href = '/home'
-            } else {
-                localStorage.setItem('auth', false)
-            }
-        }
+      resMessage(res => res = login.data.message)
+
+      if (login.data.code === 200) {
+        setGlobal({ username: form.username });
+        localStorage.setItem('auth', true)
+        localStorage.setItem('setupTime', new Date().getTime())
+        props.history.push('/home');
+      } else {
+        localStorage.setItem('auth', false)
+      }
     }
+  }
 
-    const updateField = event => {
-        setFormInfo({
-            ...form,
-            [event.target.name]: event.target.value
-        });
-    };
+  const updateField = event => {
+    setFormInfo({
+      ...form,
+      [event.target.name]: event.target.value
+    });
+  };
 
-    return (
-        <div>
-            <div>
-                <label htmlFor="">Username</label>
-                <input type="text" name="username" autoFocus autoComplete="off" value={form.username} onChange={updateField} />
-            </div>
+  const handlePress = event => {
+    if (event.key === 'Enter') handleLogin();
+  }
 
-            <div>
-                <label htmlFor="">Password</label>
-                <input type="password" name="password" autoComplete="off" value={form.password} onChange={updateField} />
-                <br />
-            </div>
+  return (
+    <div>
+      <div>
+        <label htmlFor="">Username</label>
+        <input type="text" name="username" autoFocus autoComplete="off" value={form.username} onChange={updateField} />
+      </div>
 
-            <pre>{res}</pre>
+      <div>
+        <label htmlFor="">Password</label>
+        <input type="password" name="password" autoComplete="off" value={form.password} onChange={updateField} onKeyPress={handlePress} />
+        <br />
+      </div>
 
-            <button onClick={Login}>Dang nhap</button>
+      <pre>{res}</pre>
 
-            <div>
-                <button onClick={() => props.history.push("/register")}>Dang ky</button>
-                <button onClick={() => props.history.push("/forgot")}>Quen mat khau</button>
-            </div>
-        </div>
-    )
+      <button onClick={handleLogin} >Dang nhap</button>
+
+      <div>
+        <button onClick={() => props.history.push("/register")}>Dang ky</button>
+        <button onClick={() => props.history.push("/forgot")}>Quen mat khau</button>
+      </div>
+    </div>
+  )
 }
 
 export default withRouter(Login);
