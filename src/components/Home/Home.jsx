@@ -8,7 +8,7 @@ const Home = props => {
 
   const handleLogout = () => {
     localStorage.clear()
-    window.location.href = '/login'
+    props.history.push('/login')
   }
 
   return (
@@ -17,7 +17,7 @@ const Home = props => {
       <b>Login successfully!! Welcome back, {username}</b>
       <br />
       <br />
-      <button onClick={() => window.location.href = '/update'}>Change password</button>
+      <button onClick={() => props.history.push('/update')}>Change password</button>
       <button onClick={handleLogout}>Log out</button>
     </div>
   )
