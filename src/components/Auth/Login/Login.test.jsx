@@ -8,7 +8,8 @@ const props = {
   initFormParams: {
     username: 'thainq00',
     password: '1'
-  }
+  },
+  history: []
 }
 
 it('should render correctly', () => {
@@ -23,9 +24,9 @@ it('has 2 inputs and 3 buttons', () => {
   wrapper.unmount();
 });
 
-it('change username, password and submit form', () => {
+it('Login success - change username, password and submit form', () => {
   const wrapper = mount(<Login {...props} />);
-  const loginFn = jest.spyOn(authServices, 'login');
+  const loginFn = jest.spyOn(authServices, 'login').mockImplementation(() => Promise.resolve({ data: { code: 200, message: 'Thanh cong' } }));
   wrapper.find('input#username').simulate('change', { target: { value: props.initFormParams.username } })
   wrapper.find('input#password').simulate('change', { target: { value: props.initFormParams.password } })
   wrapper.find('button#login-btn').simulate('click')
