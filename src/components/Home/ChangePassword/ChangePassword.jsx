@@ -1,8 +1,7 @@
 import React, { useState } from 'reactn';
-import axios from 'axios'
 import { isLogin } from 'helpers/auth'
+import { authServices } from 'services'
 
-const CHANGE_PASS_URL = 'http://127.0.0.1:5000/changePass'
 
 const ChangePass = props => {
     if (!isLogin()) props.history.push('/login')
@@ -16,17 +15,18 @@ const ChangePass = props => {
 
     const resetPass = async () => {
         resMessage(res => res = '')
-        if (!form.username || !form.password || !form.newpassword) 
+        if (!form.username || !form.password || !form.newpassword)
             resMessage(res => res = 'All fields required!')
-        else 
-            if (form.password === form.newpassword) 
+        else
+            if (form.password === form.newpassword)
                 resMessage(res => res = 'Old password and new password must be different!')
             else {
-                const result = await axios.post(CHANGE_PASS_URL, {
+                const params = {
                     username: form.username,
                     password: form.password,
                     newpassword: form.newpassword
-                })
+                }
+                const result = await authServices.changePassword(params)
                 if (result) resMessage(res => res = result.data.message)
             }
     }

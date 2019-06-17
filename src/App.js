@@ -5,7 +5,7 @@ import './App.css';
 import Login from './components/Auth/Login/Login'
 import Register from './components/Auth/Register'
 import Home from './components/Home/Home'
-import ChangePass from './components/Home/ChangePassword'
+import ChangePass from './components/Home/ChangePassword/ChangePassword'
 import ForgotPass from './components/Auth/ForgotPassword'
 
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
