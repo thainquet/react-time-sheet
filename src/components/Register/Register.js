@@ -1,7 +1,7 @@
 
 import React, { useState } from 'reactn';
 import { withRouter } from 'react-router'
-
+import { authServices } from 'services'
 
 const Register = (props) => {
   // handle username
@@ -64,8 +64,33 @@ const Register = (props) => {
     props.history.push('/login')
   }
 
-  const handleRegister = () => {
-    (messageUsername || messagePassword || emailMessage) ? console.log('input k hop le') : console.log({ username }, { password }, { email })
+  const [res, resMessage] = useState('')
+
+  const handleRegister = async () => {
+    if (!username || !email || !password) {
+      alert("all fields required")
+    }
+    else 
+      if (messageUsername || messagePassword || emailMessage) {
+        alert('input k hop le')
+        setEmail(email => email = '')
+        setUsername(username => username = '')
+        setPassword(password => password = '')
+      }
+      else{
+        resMessage(res => res = '')
+        const params = {
+          username,
+          password,
+          email
+        }
+        const result = await authServices.register(params)
+        resMessage(res => res = result.data.message)
+      } 
+  }
+
+  const handlePress = event => {
+    if (event.key === 'Enter') handleRegister();
   }
 
   return (
@@ -90,17 +115,19 @@ const Register = (props) => {
 
       <div>
         <label htmlFor="">Email</label>
-        <input type="text" autoComplete="off" name="email" onChange={(event) => handleEmailInput(event)} />
+        <input type="text" autoComplete="off" name="email" onChange={(event) => handleEmailInput(event)} onKeyPress={handlePress} />
         <br />
         <pre>
           {emailMessage && <b>{emailMessage}</b>}
         </pre>
       </div>
 
-      <button onClick={() => handleRegister}>Dang ky</button>
-
+      <button onClick={() => handleRegister()}>Dang ky</button>
+      <pre>
+        {res && <b>{res}</b>}
+      </pre>
       <div>
-        <button onClick={handleToLoginForm}>Dang nhap</button>
+        <button onClick={() => handleToLoginForm()}>Dang nhap</button>
       </div>
     </div>
   )
