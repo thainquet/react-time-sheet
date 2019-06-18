@@ -1,15 +1,13 @@
 
 import React, { useState } from 'reactn'
-import axios from 'axios'
-import { withRouter } from 'react-router'
-
-const RESET_PASS_URL = 'http://127.0.0.1:5000/forgotPass'
+import { authServices } from 'services'
 
 const ForgotPass = props => {
-    const [form, setFormInfo] = useState({
+    const { initFormParams = {
         username: '',
         email: ''
-    })
+      } } = props;
+    const [form, setFormInfo] = useState(initFormParams)
 
     const [res, resMessage] = useState('')
 
@@ -18,10 +16,11 @@ const ForgotPass = props => {
         if (!form.username || !form.email) 
             resMessage(res => res = 'All fields required!')
         else {
-            const reset = await axios.post(RESET_PASS_URL, {
+            const params = {
                 username: form.username,
                 email: form.email
-            })
+            }
+            const reset = await authServices.forgotPassword(params)
             if (reset) resMessage(res => res = reset.data.message)  
         }      
     }
@@ -46,11 +45,11 @@ const ForgotPass = props => {
                 <br />
             </div>
             <pre>{res}</pre>
-            <button onClick={resetPass}>Reset Password</button>
-            <button onClick={() => props.history.push('/login')}>Login page</button>
+            <button onClick={resetPass} id="forgot-pass-btn">Reset Password</button>
+            <button onClick={() => props.history.push('/login')} id="login-btn">Login page</button>
         </div>
     )
 }
 
-export default withRouter(ForgotPass);
+export default ForgotPass;
 

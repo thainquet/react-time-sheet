@@ -8,6 +8,10 @@ const changePassword = (params) => {
   return axios.post(`${process.env.REACT_APP_API_URL}/changePass`, params);
 }
 
+const forgotPassword = (params) => {
+  return axios.post(`${process.env.REACT_APP_API_URL}/forgotPass`, params);
+}
+
 export default {
-  login, changePassword
+  login, changePassword, forgotPassword
 }

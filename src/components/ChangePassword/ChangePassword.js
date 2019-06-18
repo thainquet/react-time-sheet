@@ -16,7 +16,6 @@ const ChangePass = props => {
 
   const resetPass = async () => {
     resMessage(res => res = '')
-    console.log(form)
     if (!form.username || !form.password || !form.newpassword)
       resMessage(res => res = 'All fields required!')
     else

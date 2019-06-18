@@ -2,8 +2,8 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap'
 import './App.css';
 
-import Login from './components/Auth/Login/Login'
-import Register from './components/Auth/Register'
+import Login from './components/Login/Login'
+import Register from './components/Register/Register'
 import Home from './components/Home/Home'
 import ChangePass from './components/ChangePassword/ChangePassword'
 import ForgotPass from './components/ForgotPassword/ForgotPassword'

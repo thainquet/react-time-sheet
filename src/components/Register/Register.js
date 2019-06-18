@@ -64,6 +64,10 @@ const Register = (props) => {
     props.history.push('/login')
   }
 
+  const handleRegister = () => {
+    (messageUsername || messagePassword || emailMessage) ? console.log('input k hop le') : console.log({ username }, { password }, { email })
+  }
+
   return (
     <div>
       <div>
@@ -93,9 +97,7 @@ const Register = (props) => {
         </pre>
       </div>
 
-      <button onClick={() => {
-        (messageUsername || messagePassword || emailMessage) ? console.log('input k hop le') : console.log({ username }, { password }, { email })
-      }}>Dang ky</button>
+      <button onClick={() => handleRegister}>Dang ky</button>
 
       <div>
         <button onClick={handleToLoginForm}>Dang nhap</button>
