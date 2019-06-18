@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+<div>
+  <br />
+  <b>
+    Login successfully!! Welcome back, 
+  </b>
+  <br />
+  <br />
+  <button
+    onClick={[Function]}
+  >
+    Change password
+  </button>
+  <button
+    onClick={[Function]}
+  >
+    Log out
+  </button>
+</div>
+`;

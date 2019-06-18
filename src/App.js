@@ -1,28 +1,39 @@
-import React, { Component } from 'react';
-import { Container, Row, Col} from 'react-bootstrap'
+import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap'
 import './App.css';
-import Home from './components/Home/Home'
-// import MainPage from './components/Login/MainPage'
+
 import Login from './components/Login/Login'
-// import {ValidationSchemaExample as tempLogin} from './components/Login/tempLogin'
+import Register from './components/Register/Register'
+import Home from './components/Home/Home'
+import ChangePass from './components/ChangePassword/ChangePassword'
+import ForgotPass from './components/ForgotPassword/ForgotPassword'
 
-import {Route } from 'react-router-dom'
+import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
+import { clearAuth } from 'helpers/clearAuth'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <Container>
-          <Row>
-            <Col md='12'>
-            <Route exact path="/" component={Login} />
-            <Route path="/home" component={Home} />
-            </Col>
-          </Row>
-        </Container>
-      </div>
-    );
-  }
+clearAuth();
+
+const App = () => {
+  return (
+    <div className="App">
+      <Container>
+        <Row>
+          <Col md='12'>
+            <Router>
+              <Switch>
+                <Route path="/home" component={Home} />
+                <Route path="/register" component={Register} />
+                <Route path="/login" component={Login} />
+                <Route path="/update" component={ChangePass} />
+                <Route path="/forgot" component={ForgotPass} />
+                <Redirect from="/" to="/login" />
+              </Switch>
+            </Router>
+          </Col>
+        </Row>
+      </Container>
+    </div>
+  );
 }
 
 export default App;
