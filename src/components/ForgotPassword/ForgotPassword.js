@@ -45,7 +45,7 @@ const ForgotPass = props => {
                 <br />
             </div>
             <pre>{res}</pre>
-            <button onClick={resetPass} id="forgot-pass-btn">Reset Password</button>
+            <button onClick={() => resetPass()} id="forgot-pass-btn">Reset Password</button>
             <button onClick={() => props.history.push('/login')} id="login-btn">Login page</button>
         </div>
     )

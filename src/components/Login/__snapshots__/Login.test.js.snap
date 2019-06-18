@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+Array [
+  <div>
+    <label
+      htmlFor=""
+    >
+      Username
+    </label>
+    <input
+      autoComplete="off"
+      autoFocus={true}
+      id="username"
+      name="username"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </div>,
+  <div>
+    <label
+      htmlFor=""
+    >
+      Password
+    </label>
+    <input
+      autoComplete="off"
+      id="password"
+      name="password"
+      onChange={[Function]}
+      onKeyPress={[Function]}
+      type="password"
+      value=""
+    />
+    <br />
+  </div>,
+  <pre>
+    
+  </pre>,
+  <button
+    id="login-btn"
+    onClick={[Function]}
+  >
+    Dang nhap
+  </button>,
+  <div>
+    <button
+      onClick={[Function]}
+    >
+      Dang ky
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      Quen mat khau
+    </button>
+  </div>,
+]
+`;

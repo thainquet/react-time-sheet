@@ -1,9 +1,8 @@
 import React, { useGlobal } from 'reactn';
-import { Redirect } from 'react-router-dom'
 import { isLogin } from 'helpers/auth'
 
-const Home = props => {
-  if (!isLogin()) return <Redirect to="/login" />
+const Home = (props) => {
+  if (!isLogin()) props.history.push('/login')
   const [username] = useGlobal('username');
 
   const handleLogout = () => {
@@ -18,7 +17,7 @@ const Home = props => {
       <br />
       <br />
       <button onClick={() => props.history.push('/update')}>Change password</button>
-      <button onClick={handleLogout}>Log out</button>
+      <button onClick={() => handleLogout()}>Log out</button>
     </div>
   )
 }

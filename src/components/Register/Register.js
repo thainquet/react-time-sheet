@@ -1,12 +1,15 @@
 
 import React, { useState } from 'reactn';
-import { withRouter } from 'react-router'
 import { authServices } from 'services'
 
 const Register = (props) => {
+  const { 
+    initParams = { username: '', password: '', email: '' },
+    initMessage = { messageUsername: '', messagePassword: '', emailMessage: '' }
+ } = props;
   // handle username
-  const [username, setUsername] = useState('')
-  const [messageUsername, setUsernameMessage] = useState('')
+  const [username, setUsername] = useState(initParams.username)
+  const [messageUsername, setUsernameMessage] = useState(initMessage.messageUsername)
 
   const handleUsernameInput = (event) => {
     let input = event.target.value;
@@ -26,8 +29,8 @@ const Register = (props) => {
     }
   }
   //handle password
-  const [password, setPassword] = useState('')
-  const [messagePassword, setPasswordMessage] = useState('')
+  const [password, setPassword] = useState(initParams.password)
+  const [messagePassword, setPasswordMessage] = useState(initMessage.messagePassword)
 
   const handlePasswordInput = event => {
     let input = event.target.value;
@@ -44,8 +47,8 @@ const Register = (props) => {
     }
   }
   // handle email
-  const [email, setEmail] = useState('')
-  const [emailMessage, setEmailMessage] = useState('')
+  const [email, setEmail] = useState(initParams.email)
+  const [emailMessage, setEmailMessage] = useState(initMessage.emailMessage)
 
   const handleEmailInput = event => {
     let input = event.target.value;
@@ -68,11 +71,11 @@ const Register = (props) => {
 
   const handleRegister = async () => {
     if (!username || !email || !password) {
-      alert("all fields required")
+      resMessage(res => res = "all fields required")
     }
     else 
       if (messageUsername || messagePassword || emailMessage) {
-        alert('input k hop le')
+        resMessage(res => res = 'input k hop le')
         setEmail(email => email = '')
         setUsername(username => username = '')
         setPassword(password => password = '')
@@ -97,7 +100,7 @@ const Register = (props) => {
     <div>
       <div>
         <label htmlFor="">Username</label>
-        <input type="text" autoFocus autoComplete="off" name="username" onChange={(event) => handleUsernameInput(event)} />
+        <input type="text" autoFocus autoComplete="off" name="username" value={username} onChange={(event) => handleUsernameInput(event)} />
         <br />
         <pre>
           {messageUsername && <b>{messageUsername}</b>}
@@ -106,7 +109,7 @@ const Register = (props) => {
 
       <div>
         <label htmlFor="">Password</label>
-        <input type="password" autoComplete="off" name="password" onChange={(event) => handlePasswordInput(event)} />
+        <input type="password" autoComplete="off" name="password" value={password} onChange={(event) => handlePasswordInput(event)} />
         <br />
         <pre>
           {messagePassword && <b>{messagePassword}</b>}
@@ -115,14 +118,14 @@ const Register = (props) => {
 
       <div>
         <label htmlFor="">Email</label>
-        <input type="text" autoComplete="off" name="email" onChange={(event) => handleEmailInput(event)} onKeyPress={handlePress} />
+        <input type="text" autoComplete="off" name="email" value={email} onChange={(event) => handleEmailInput(event)} onKeyPress={handlePress} />
         <br />
         <pre>
           {emailMessage && <b>{emailMessage}</b>}
         </pre>
       </div>
 
-      <button onClick={() => handleRegister()}>Dang ky</button>
+      <button onClick={() => handleRegister()} id="register-btn">Dang ky</button>
       <pre>
         {res && <b>{res}</b>}
       </pre>
@@ -133,5 +136,5 @@ const Register = (props) => {
   )
 }
 
-export default withRouter(Register);
+export default Register
 
